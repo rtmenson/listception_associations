@@ -9,7 +9,7 @@
       <dd><%= @list.title %></dd>
 
       <dt>Board</dt>
-      <dd><%= @list.board_id %></dd>
+      <dd><a href="/boards/<%=@list.board_id%>"><%= @list.board.title %></a></dd>
 
       <dt>Position order</dt>
       <dd><%= @list.position_order %></dd>

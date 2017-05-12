@@ -12,7 +12,7 @@
       <dd><%= @card.description %></dd>
 
       <dt>List</dt>
-      <dd><%= @card.list_id %></dd>
+      <dd><a href="/lists/<%= @card.list_id %>"> <%=@card.list.title %></a></dd>
 
       <dt>Position order</dt>
       <dd><%= @card.position_order %></dd>
@@ -30,5 +30,41 @@
         Delete
       </a>
     </div>
+
+    <h2> Notes </h2>
+    <ol>
+    <% @card.notes.each do |note| %>
+      <li>
+        Body: <%= note.body %>
+      </li>
+
+      <div>
+        <form action="/create_note" method="post">
+
+          <input type="hidden" name="card_id" value= "<%=@card.id%>">
+
+          <div class="form-group">
+            <label for="title" class="control-label">
+              Body
+            </label>
+            <input type="text" id="body" name="body" placeholder="Body" class="form-control">
+          </div>
+
+
+        <button class="btn btn-success">
+          Create Note
+        </button>
+      </form>
+      </div>
+
+    </ol>
+    <%end%>
+
+    <h2> Tags </h2>
+
+
+
+
+
   </div>
 </div>

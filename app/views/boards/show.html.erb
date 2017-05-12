@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h3>Board #<%= @board.id %></h3>
+  <h3>Board #<%= @board.id %>:</h3>
 </div>
 
 <div class="row">
@@ -23,6 +23,69 @@
       <a href="/delete_board/<%= @board.id %>" class="btn btn-default" rel="nofollow">
         Delete
       </a>
+    </div>
+
+    <div>
+      <h2> Add a new list </h2>
+      <form action="/create_list" method="post">
+
+        <input type="hidden" id="board_id" name="board_id" placeholder="Board" class="form-control" value="<%= @board.id%>">
+
+        <div class="form-group">
+          <label for="name" class="control-label">
+            Title
+          </label>
+          <input type="text" id="title" name="title" placeholder="Title" class="form-control">
+        </div>
+
+        <button class="btn btn-success">
+          Create List
+        </button>
+      </form>
+
+      <h2> Lists </h2>
+
+      <ol>
+        <% @board.lists.each do |list| %>
+        <li> List: <a href="/lists/<%=list.id%>"><%= list.title%></a>
+          <ol>
+            <% list.cards.each do |card| %>
+            <li>
+              Card: <a href="/cards/<%=card.id%>"><%= card.title%></a> <br>
+              Description: <%= card.description%>
+            </li>
+            <%end%>
+          </ol>
+
+          <div>
+            <form action="/create_card" method="post">
+
+              <input type="hidden" name="list_id" value= "<%=list.id%>">
+
+              <div class="form-group">
+                <label for="title" class="control-label">
+                  Title
+                </label>
+                <input type="text" id="title" name="title" placeholder="Title" class="form-control">
+              </div>
+
+              <div class="form-group">
+              <label for="description" class="control-label">
+                Description
+              </label>
+              <input type="text" id="description" name="description" placeholder="Description" class="form-control">
+            </div>
+
+            <button class="btn btn-success">
+              Create Card
+            </button>
+          </form>
+        </div>
+        <%end %>
+
+      </ol>
+
+
     </div>
   </div>
 </div>
